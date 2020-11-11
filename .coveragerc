@@ -1,0 +1,2 @@
+[run]
+omit = countblocks.py,decompose.py,t/*

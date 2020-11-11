@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+bandit = "*"
+isort = "*"
+mypy = "*"
+pycodestyle = "*"
+pydocstyle = "*"
+pyflakes = "*"
+pylama = "*"
+pylama-pylint = "*"
+pytest = "*"
+pytest-cov = "*"
+numpy = "*"
+matplotlib = "*"
+scipy = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
