@@ -1,0 +1,9 @@
+This installation is set up to be managed by pipenv.
+
+(0) If you do not have pipenv, install it.
+On a Mac with homebrew, "brew install pipenv" should work.
+Lacking that, try "pip install pipenv"
+
+(1) Run "make pipenv_setup" to install all dependencies
+and then put yourself into a pipenv shell.
+
