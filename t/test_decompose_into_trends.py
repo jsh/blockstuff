@@ -2,7 +2,7 @@
 """Test parse_args() function."""
 
 
-from decompose import parse_args
+from decompose_into_trends import parse_args
 
 
 def test_parse_args_defaults() -> None:
