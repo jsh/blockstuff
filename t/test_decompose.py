@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test parse_args module."""
+"""Test parse_args() function."""
 
 
 from decompose import parse_args

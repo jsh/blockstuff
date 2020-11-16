@@ -9,7 +9,7 @@ Block = List[float]
 Blocks = List[Block]
 
 
-def average(seq: Block, ave_fn: Callable = statistics.fmean) -> float:
+def average(seq: Block, ave_fn: Callable = statistics.mean) -> float:
     """An average."""
     return ave_fn(seq)
 

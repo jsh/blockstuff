@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Test parse_args module."""
+"""Test parse_args() function."""
 
 
-from countblocks import parse_args
+from average_block_count import parse_args
 
 
 def test_parse_args_defaults() -> None:
@@ -17,10 +17,16 @@ def test_verbose() -> None:
     assert parser.verbose
 
 
-def test_max_magnitude() -> None:
-    """parse_args understands --max_magnitude."""
-    parser = parse_args(["--max_magnitude=10"])
-    assert parser.max_magnitude == 10
+def test_length() -> None:
+    """parse_args understands --length."""
+    parser = parse_args(["--length=8"])
+    assert parser.length == 8
+
+
+def test_trials() -> None:
+    """parse_args understands --trials."""
+    parser = parse_args(["--trials=200"])
+    assert parser.trials == 200
 
 
 def test_help() -> None:
