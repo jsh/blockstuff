@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Show how number of blocks changes with sequence length."""
 
-
+import argparse
 import sys
 from random import random
+from typing import List, Optional
 
 import matplotlib.pyplot as plt  # type: ignore
 import numpy as np  # type: ignore
@@ -13,7 +14,7 @@ from blockstuff import assimilate_block
 
 
 def lineplot(magnitudes, ntrends):
-    """Plot commits against week."""
+    """Plot # of trends against log(sequence length)."""
     slope, intercept, rvalue, pvalue, stderr = scipy.stats.linregress(
         magnitudes, ntrends
     )
@@ -31,11 +32,42 @@ def lineplot(magnitudes, ntrends):
     plt.show()
 
 
+def parse_args(args: Optional[List] = None) -> argparse.Namespace:
+    """Parse the args
+    :param str description: description message for executable
+    :param list or None args: the argument list to parse
+    :returns: the args, massaged and sanity-checked
+    :rtype: argparse.Namespace
+
+    When this finishes we return a Namespace that has these attributes
+      - verbose: how chatty to be (bool)
+      - max_magnitude: largest power of 2 to use for a length.
+    """
+
+    parser = argparse.ArgumentParser(
+        description="Plot block count against log(sequence length)."
+    )
+
+    parser.add_argument("--verbose", help="be extra chatty", action="store_true")
+    parser.add_argument(
+        "--max_magnitude", help="largest power of 2 to use for length", type=int
+    )
+
+    if args is None:
+        args = []
+    parsed_args = parser.parse_args(args)
+    if parsed_args.verbose:
+        print(parsed_args, file=sys.stderr)
+
+    return parsed_args
+
+
 def main():
     """The big enchilada."""
     blocks = []
 
-    magnitudes = int(sys.argv[1])
+    args = parse_args()
+    magnitudes = args.max_magnitude
     numblocks = [0] * magnitudes
     for magnitude in range(magnitudes):
         size = 2 ** magnitude

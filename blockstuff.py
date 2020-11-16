@@ -53,13 +53,15 @@ def assimilate_block(
     return assimilate_block(blocks, block, meldable)
 
 
-def show_blocks(blocks: Blocks, header: bool = True) -> None:
+def show_blocks(blocks: Blocks, verbose: bool = True) -> None:
     """Show the blocks and their averages."""
-    if header:
+    if verbose:
         print("\naverage |\ttrend\n")
 
     for block in blocks:
-        line = f"{average(block):7.2f} |\t"
+        line = ""
+        if verbose:
+            line += f"{average(block):7.2f} |\t"
         for val in block:
             line += f"{val:2.2f}\t"
         print(line)
