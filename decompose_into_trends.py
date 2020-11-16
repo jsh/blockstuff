@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pypy3
 """Decompose a sequence of reals into increasing trends."""
 
 import argparse

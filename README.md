@@ -10,7 +10,10 @@ See [INSTALL](https://github.com/jsh/blockstuff/blob/master/INSTALL).
 
 ## Performance
 
-To improve performance (substantially), install `pypy3` and change all shebang lines from `#!/usr/bin/env python` to `#!/usr/bin/env/pypy3`
+The pypy3 interpreter will make these scripts run __much__ faster than the standard python3 interpreter.
+Right now, all the shebang lines are `#!/usr/bin/env/pypy3`.
+If you can, install `pypy3`.
+If not, just all the shebang lines to `#!/usr/bin/env python3`.
 
 ## Overview
 
