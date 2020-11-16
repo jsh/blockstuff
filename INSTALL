@@ -7,3 +7,5 @@ Lacking that, try "pip install pipenv"
 (1) Run "make pipenv_setup" to install all dependencies
 and then put yourself into a pipenv shell.
 
+(2) To install pypy3, run "pip install pypy3"
+
