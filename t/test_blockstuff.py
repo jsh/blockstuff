@@ -51,9 +51,9 @@ def test_never() -> None:
 
 def test_merge() -> None:
     """Merge two blocks."""
-    assert merge([], ["a"]) == ["a"]
-    assert merge(["a"], ["b"]) == ["a", "b"]
-    assert merge(["a", "b"], ["c", "d"]) == ["a", "b", "c", "d"]
+    assert merge([], [1.0]) == [1.0]
+    assert merge([1.0], [2.0]) == [1.0, 2.0]
+    assert merge([1.0, 2.0], [3.0, 4.0]) == [1.0, 2.0, 3.0, 4.0]
 
 
 def test_assimilate_block() -> None:

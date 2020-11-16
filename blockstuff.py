@@ -3,15 +3,15 @@
 
 import statistics
 from copy import deepcopy
-from typing import List
+from typing import Callable, List
 
 Block = List[float]
 Blocks = List[Block]
 
 
-def average(seq: Block) -> float:
+def average(seq: Block, ave_fn: Callable = statistics.fmean) -> float:
     """An average."""
-    return statistics.fmean(seq)
+    return ave_fn(seq)
 
 
 def increasing_trend(old_block: Block, new_block: Block) -> bool:
@@ -53,10 +53,13 @@ def assimilate_block(
     return assimilate_block(blocks, block, meldable)
 
 
-def show_blocks(blocks: Blocks) -> None:
+def show_blocks(blocks: Blocks, header: bool = True) -> None:
     """Show the blocks and their averages."""
+    if header:
+        print("\naverage |\ttrend\n")
+
     for block in blocks:
-        line = f"{average(block):4.2f} |\t"
+        line = f"{average(block):7.2f} |\t"
         for val in block:
-            line += f"{val:4.2f}\t"
+            line += f"{val:2.2f}\t"
         print(line)
