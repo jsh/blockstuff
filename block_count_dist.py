@@ -2,9 +2,9 @@
 """Show how number of blocks changes with sequence length."""
 
 import argparse
+import random
 import statistics
 import sys
-from random import random
 from typing import List, Optional
 
 from blockstuff import assimilate_block
@@ -57,7 +57,7 @@ def main():
     for _ in range(trials):
         blocks = []
         for _ in range(length):
-            blocks = assimilate_block(blocks, [random()])  # nosec
+            blocks = assimilate_block(blocks, [random.uniform(0, 1)])  # nosec
         numblocks = len(blocks)
         numblocks_list.append(numblocks)
         if numblocks not in numblocks_dict:
