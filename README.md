@@ -10,10 +10,17 @@ See [INSTALL](https://github.com/jsh/blockstuff/blob/master/INSTALL).
 
 ## Performance
 
+Right now, shebang lines may be `#!/usr/bin/env pypy3` or `#!/usr/bin/env python3`
+
 The pypy3 interpreter will make these scripts run __much__ faster than the standard python3 interpreter.
-Right now, all the shebang lines are `#!/usr/bin/env/pypy3`.
-If you can, install `pypy3`.
-If not, just all the shebang lines to `#!/usr/bin/env python3`.
+
+If you can, install `pypy3` and make the lines `#!/usr/bin/env pypy3`.
+If not, just set the shebang lines to `#!/usr/bin/env python3`.
+
+N.B., At this writing, `pypy3` is back-rev to `python3`, so some functions may only be available with `python3`.
+For example, `statistics.harmonic_mean()` is available for both,
+but `statistics.fmean()` and `statistics.geometric_mean()` are only available with `python3`.
+For some experiments, you may __have__ to use the slower interpreter.
 
 ## Overview
 
