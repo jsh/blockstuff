@@ -26,11 +26,13 @@ def decreasing_trend(old_block: Block, new_block: Block) -> bool:
 
 def always(old_block: Block, new_block: Block) -> bool:
     """Always merge."""
+    _, _ = (old_block, new_block)
     return True
 
 
 def never(old_block: Block, new_block: Block) -> bool:
     """Never merge."""
+    _, _ = old_block, new_block
     return False
 
 
@@ -51,6 +53,30 @@ def assimilate_block(
         return blocks + [block, new_block]
     block = merge(block, new_block)
     return assimilate_block(blocks, block, meldable)
+
+
+def decompose_into_blocks(elems: List[float]) -> Blocks:
+    """Break a sequence into blocks."""
+    blocks: Blocks = []
+    for elem in elems:
+        blocks = assimilate_block(blocks, [elem])  # nosec
+    return blocks
+
+
+def rotate(blocks: Blocks) -> Blocks:
+    """
+    Shift off the leading, leftmost block,
+    then push it onto the right end, assimilating as needed.
+    """
+    leftmost = blocks[0]
+    return assimilate_block(blocks[1:], leftmost)
+
+
+def single_block(blocks: Blocks) -> Blocks:
+    """Rotate an array of blocks until there's just one."""
+    while len(blocks) > 1:
+        blocks = rotate(blocks)
+    return blocks
 
 
 def show_blocks(blocks: Blocks, verbose: bool = True) -> None:
