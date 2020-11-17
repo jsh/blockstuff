@@ -2,7 +2,7 @@
 """Test parse_args() function."""
 
 
-from average_block_count import parse_args
+from average_break_count import parse_args
 
 
 def test_parse_args_defaults() -> None:
