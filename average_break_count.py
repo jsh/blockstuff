@@ -24,7 +24,7 @@ def parse_args(args: Optional[List] = None) -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser(
-        description="Average # of blocks over several trials."
+        description="Average # of breaks over many trials."
     )
 
     parser.add_argument("--verbose", help="be extra chatty", action="store_true")
@@ -44,14 +44,14 @@ def main():
     """The big enchilada."""
 
     args = parse_args(sys.argv[1:])
-    cumulative_numblocks = 0
+    cumulative_numbreaks = 0
     for _ in range(args.trials):
         blocks = []
         for _ in range(args.length):
             blocks = assimilate_block(blocks, [random()])  # nosec
-        cumulative_numblocks += len(blocks)
-    header = "average number of blocks:\t" if args.verbose else ""
-    print(f"{header}{cumulative_numblocks/args.trials}")
+        cumulative_numbreaks += len(blocks) - 1
+    header = "average number of breaks:\t" if args.verbose else ""
+    print(f"{header}{cumulative_numbreaks/args.trials}")
 
 
 if __name__ == "__main__":

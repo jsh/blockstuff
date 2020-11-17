@@ -46,38 +46,42 @@ def main():
     args = parse_args(sys.argv[1:])
     length = args.length
     trials = args.trials
-    numblocks_dict = (
+    numbreaks_dict = (
         {}
-    )  # numblocks_dict{3} is the number of trials that produced 3 blocks
+    )  # numbreaks_dict{3} is the number of trials that produced 3 breaks (4 blocks)
     # -- useful for graphing
-    numblocks_list = (
+    numbreaks_list = (
         []
-    )  # numblocks_list[3] is the number of blocks produced in the fourth trial
+    )  # numbreaks_list[3] is the number of breaks produced in the fourth trial
     # -- useful for statistics
     for _ in range(trials):
         blocks = []
         for _ in range(length):
             blocks = assimilate_block(blocks, [random.uniform(0, 1)])  # nosec
-        numblocks = len(blocks)
-        numblocks_list.append(numblocks)
-        if numblocks not in numblocks_dict:
-            numblocks_dict[numblocks] = 0
-        numblocks_dict[numblocks] += 1
+        numbreaks = len(blocks) - 1  # blk | blk | blk is three blocks, two breaks
+        numbreaks_list.append(numbreaks)
+        if numbreaks not in numbreaks_dict:
+            numbreaks_dict[numbreaks] = 0
+        numbreaks_dict[numbreaks] += 1
 
     if args.verbose:
         try:
-            print(f"mode(# of blocks), {statistics.mode(numblocks_list)}")
+            print(f"mode(# of breaks), {statistics.mode(numbreaks_list)}")
         except Exception:
             print("no single mode")
-        print(f"median(# of blocks), {statistics.median(numblocks_list)}")
-        print(f"mean(# of blocks), {statistics.mean(numblocks_list)}")
-        print(f"variance(# of blocks), {statistics.variance(numblocks_list)}")
+        print(f"median(# of breaks), {statistics.median(numbreaks_list)}")
+        print(f"mean(# of breaks), {statistics.mean(numbreaks_list)}")
+        print(f"variance(# of breaks), {statistics.variance(numbreaks_list)}")
+        print(
+            "q ~ variance/mean = "
+            + f"{statistics.variance(numbreaks_list)/statistics.mean(numbreaks_list)}"
+        )
 
     if args.verbose:
-        print("\nnumber of blocks\ttimes seen\n")
+        print("\nnumber of breaks\t# of trials seen\n")
 
-    for key in sorted(numblocks_dict.keys()):
-        print(f"{key:15}\t\t{numblocks_dict[key]:10}")
+    for key in sorted(numbreaks_dict.keys()):
+        print(f"{key:15}\t\t{numbreaks_dict[key]:10}")
 
 
 if __name__ == "__main__":
