@@ -8,7 +8,8 @@ TESTS := $(wildcard t/*.py)
 all: lint test requirements.txt
 
 bandit:
-	bandit -q -s B101 ${SOURCES}
+	bandit -q ${SOURCES}
+	bandit -q -s B101 ${TESTS}  # don't warn about asserts
 
 black: isort
 	black -q ${SOURCES} ${TESTS}
