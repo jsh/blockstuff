@@ -27,7 +27,7 @@ fixme:
 isort:
 	isort ${SOURCES} ${TESTS}
 
-lint: black pylama bandit
+lint: black pylama bandit mypy
 
 mypy:
 	mypy ${PWD}
