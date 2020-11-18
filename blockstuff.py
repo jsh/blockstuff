@@ -88,7 +88,6 @@ def show_blocks(blocks: Blocks, verbose: bool = True) -> None:
     """Show the blocks and their averages."""
     if verbose:
         print("\naverage |\ttrend\n")
-
     for block in blocks:
         line = ""
         if verbose:
