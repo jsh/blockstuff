@@ -40,7 +40,7 @@ pylama:
 	pylama -o .config/pylama ${SOURCES} ${TESTS}
 
 pylint:
-	pylint --disable=fixme,broad-except -rn ${SOURCES} ${TESTS} | sort -t: -k2 -n -r
+	pylint --rcfile=.config/pylint -rn ${SOURCES} ${TESTS} | sort -t: -k2 -n -r
 
 requirements.txt: ${SOURCES} ${TESTS}
 	pip freeze > requirements.txt
