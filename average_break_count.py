@@ -3,11 +3,11 @@
 
 
 import argparse
+import random
 import sys
-from random import random
 from typing import List, Optional
 
-from blockstuff import assimilate_block
+from blockstuff import decompose_into_blocks, random_block
 
 
 def parse_args(args: Optional[List] = None) -> argparse.Namespace:
@@ -46,10 +46,11 @@ def main():
     args = parse_args(sys.argv[1:])
     cumulative_numbreaks = 0
     for _ in range(args.trials):
-        blocks = []
-        for _ in range(args.length):
-            blocks = assimilate_block(blocks, [random()])  # nosec
-        cumulative_numbreaks += len(blocks) - 1
+        seq = random_block(args.length, random.gauss, 0, 1)
+        blocks = decompose_into_blocks(seq)
+        cumulative_numbreaks += (
+            len(blocks) - 1
+        )  # blocks are the fence, breaks the fenceposts
     header = "average number of breaks:\t" if args.verbose else ""
     print(f"{header}{cumulative_numbreaks/args.trials}")
 

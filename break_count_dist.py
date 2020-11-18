@@ -7,7 +7,7 @@ import statistics
 import sys
 from typing import List, Optional
 
-from blockstuff import assimilate_block
+from blockstuff import decompose_into_blocks, random_block
 
 
 def parse_args(args: Optional[List] = None) -> argparse.Namespace:
@@ -55,10 +55,9 @@ def main():
     )  # numbreaks_list[3] is the number of breaks produced in the fourth trial
     # -- useful for statistics
     for _ in range(trials):
-        blocks = []
-        for _ in range(length):
-            blocks = assimilate_block(blocks, [random.uniform(0, 1)])  # nosec
-        numbreaks = len(blocks) - 1  # blk | blk | blk is three blocks, two breaks
+        seq = random_block(length, random.gauss, 0, 1)
+        blocks = decompose_into_blocks(seq)
+        numbreaks = len(blocks) - 1  # blocks the fences, breaks the fenceposts
         numbreaks_list.append(numbreaks)
         if numbreaks not in numbreaks_dict:
             numbreaks_dict[numbreaks] = 0

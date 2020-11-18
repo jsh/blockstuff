@@ -10,7 +10,7 @@ import random
 import sys
 from typing import List, Optional
 
-from blockstuff import Blocks, assimilate_block, rotate
+from blockstuff import Blocks, assimilate_block, rotate_blocks
 
 
 def parse_args(args: Optional[List] = None) -> argparse.Namespace:
@@ -59,7 +59,7 @@ def main() -> None:
     blocks = initial_decomposition(length)
     print(len(blocks))
     while len(blocks) > 1:
-        blocks = rotate(blocks)
+        blocks = rotate_blocks(blocks)
         print(len(blocks))
 
 

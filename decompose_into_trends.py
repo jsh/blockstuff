@@ -2,11 +2,11 @@
 """Decompose a sequence of reals into increasing trends."""
 
 import argparse
+import random
 import sys
-from random import random
 from typing import List, Optional
 
-from blockstuff import assimilate_block, show_blocks
+from blockstuff import decompose_into_blocks, random_block, show_blocks
 
 
 def parse_args(args: Optional[List] = None) -> argparse.Namespace:
@@ -37,11 +37,9 @@ def parse_args(args: Optional[List] = None) -> argparse.Namespace:
 
 def main():
     """The big enchilada."""
-    blocks = []
-
     args = parse_args(sys.argv[1:])
-    for _ in range(args.length):
-        blocks = assimilate_block(blocks, [random()])  # nosec
+    seq = random_block(args.length, random.gauss, 0, 1)
+    blocks = decompose_into_blocks(seq)
     show_blocks(blocks, args.verbose)
 
 
