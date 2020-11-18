@@ -55,7 +55,7 @@ def assimilate_block(
     return assimilate_block(blocks, block, meldable)
 
 
-def decompose_into_blocks(elems: List[float]) -> Blocks:
+def decompose_into_blocks(elems: Block) -> Blocks:
     """Break a sequence into blocks."""
     blocks: Blocks = []
     for elem in elems:
@@ -63,7 +63,12 @@ def decompose_into_blocks(elems: List[float]) -> Blocks:
     return blocks
 
 
-def rotate(blocks: Blocks) -> Blocks:
+def random_block(length: int, rand_func: Callable, *args) -> Block:
+    """Create a block full of random numbers."""
+    return [rand_func(*args) for _ in range(length)]
+
+
+def rotate_blocks(blocks: Blocks) -> Blocks:
     """
     Shift off the leading, leftmost block,
     then push it onto the right end, assimilating as needed.
@@ -72,10 +77,10 @@ def rotate(blocks: Blocks) -> Blocks:
     return assimilate_block(blocks[1:], leftmost)
 
 
-def single_block(blocks: Blocks) -> Blocks:
+def rotate_to_single_block(blocks: Blocks) -> Blocks:
     """Rotate an array of blocks until there's just one."""
     while len(blocks) > 1:
-        blocks = rotate(blocks)
+        blocks = rotate_blocks(blocks)
     return blocks
 
 
