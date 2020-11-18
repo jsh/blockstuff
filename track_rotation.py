@@ -10,7 +10,7 @@ import random
 import sys
 from typing import List, Optional
 
-from blockstuff import Blocks, assimilate_block, rotate_blocks
+from blockstuff import decompose_into_blocks, random_block, rotate_blocks
 
 
 def parse_args(args: Optional[List] = None) -> argparse.Namespace:
@@ -31,6 +31,7 @@ def parse_args(args: Optional[List] = None) -> argparse.Namespace:
 
     parser.add_argument("--verbose", help="be extra chatty", action="store_true")
     parser.add_argument("--length", help="How long a sequence to use.", type=int)
+    parser.add_argument("--trials", help="How many trials to run", type=int)
 
     if args is None:
         args = []
@@ -41,26 +42,30 @@ def parse_args(args: Optional[List] = None) -> argparse.Namespace:
     return parsed_args
 
 
-def initial_decomposition(length) -> Blocks:
-    """The big enchilada."""
-    blocks: Blocks = []
-
-    for _ in range(length):
-        blocks = assimilate_block(blocks, [random.gauss(0, 1)])  # nosec
-    return blocks
-
-
 def main() -> None:
     """The big enchilada."""
     blocks = []
 
     args = parse_args(sys.argv[1:])
-    length = args.length
-    blocks = initial_decomposition(length)
-    print(len(blocks))
-    while len(blocks) > 1:
-        blocks = rotate_blocks(blocks)
-        print(len(blocks))
+    for _ in range(args.trials):
+        seq = random_block(args.length, random.gauss, 0, 1)
+        blocks = decompose_into_blocks(seq)
+        nbreaks = len(blocks) - 1
+        initial_breaks = nbreaks
+        rotations = 0
+        while nbreaks:
+            block_sizes = [len(block) for block in blocks]
+            if args.verbose:
+                print(f"{nbreaks} | {block_sizes}")
+            blocks = rotate_blocks(blocks)
+            rotations += 1
+            nbreaks = len(blocks) - 1
+        block_sizes = [len(block) for block in blocks]
+        if args.verbose:
+            print(f"{nbreaks} | {block_sizes}")
+            print(f"initial breaks: {initial_breaks}\trotations: {rotations}")
+        else:
+            print(f"{initial_breaks}\t{rotations}")
 
 
 if __name__ == "__main__":
