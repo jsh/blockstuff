@@ -55,11 +55,11 @@ def assimilate_block(
     return assimilate_block(blocks, block, meldable)
 
 
-def decompose_into_blocks(elems: Block) -> Blocks:
+def decompose_into_blocks(elems: Block, meldable=increasing_trend) -> Blocks:
     """Break a sequence into blocks."""
     blocks: Blocks = []
     for elem in elems:
-        blocks = assimilate_block(blocks, [elem])  # nosec
+        blocks = assimilate_block(blocks, [elem], meldable)  # nosec
     return blocks
 
 
