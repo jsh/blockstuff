@@ -68,3 +68,11 @@ def test_copy() -> None:
     nvalues = [7.0, 8.0, 9.0]
     values_copy.values = nvalues
     assert values_copy.length != values.length
+
+
+def test_trendy() -> None:
+    """Trendy calculated correctly."""
+    nvalues = [7.0, 8.0, 9.0]
+    values = Values()
+    values.values = nvalues
+    assert values.average() == sum(nvalues) / len(nvalues)
