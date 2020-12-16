@@ -57,7 +57,9 @@ class Values:
         """A deep copy."""
         return deepcopy(self)
 
-    # def trendy(self, compare: Callable = __lt__, ave_fn: Callable = statistics.mean) -> bool:
+    # def trendy(self,
+    #            compare: Callable = __lt__,
+    #            ave_fn: Callable = statistics.mean) -> bool:
     #     if self.length == 1:
     #         return True
     #     for index in range(1, self.length):
