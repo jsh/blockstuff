@@ -26,8 +26,8 @@ class Trend(Values):
         """Merging preserves decreasing trend."""
         return self.average() > next_trend.average()
 
-    def __ne__(self, next_trend: "Trend") -> bool:
-        """Never merge."""
+    def __ne__(self, next_trend) -> bool:
+        """Two trends unequal."""
         _, _ = self, next_trend
         return self.values != next_trend.values
 
@@ -38,4 +38,11 @@ class Trend(Values):
         assert self.rand_params == next_trend.rand_params
         merged_trend = self.copy()
         merged_trend.values = merged_values
-        return(merged_trend)
+        return merged_trend
+
+    def copy(self):
+        """Copy a trend."""
+        copy = Trend(self.length, self.rand_func, self.rand_params)
+        copy.values = self.values
+        copy.__class__ = Trend
+        return copy

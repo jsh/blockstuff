@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Unit-test values."""
+# pylint:disable=comparison-with-callable
 
 import random
 
@@ -15,6 +16,7 @@ def test_defaults() -> None:
 
 
 def test___lt__() -> None:
+    """< compares correctly."""
     left = Trend()
     left.values = [1]
     right = Trend()
@@ -23,6 +25,7 @@ def test___lt__() -> None:
 
 
 def test___gt__() -> None:
+    """> compares correctly."""
     left = Trend()
     left.values = [2]
     right = Trend()
@@ -31,12 +34,14 @@ def test___gt__() -> None:
 
 
 def test___ne__() -> None:
+    """!= compares correctly."""
     left = Trend(length=10)
     right = Trend(length=10)
     assert left != right
 
 
 def test___add__() -> None:
+    """+ merges trends"""
     left = Trend()
     left.values = [2, 7]
     right = Trend()
@@ -44,4 +49,3 @@ def test___add__() -> None:
     merger = left + right
     assert merger.values == [2, 7, 1, 8]
     assert merger.length == 4
-
