@@ -14,9 +14,6 @@ pylama = "*"
 pylama-pylint = "*"
 pytest = "*"
 pytest-cov = "*"
-numpy = "*"
-matplotlib = "*"
-scipy = "*"
 
 [dev-packages]
 
