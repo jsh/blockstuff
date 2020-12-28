@@ -1,5 +1,6 @@
 # The usual
 
+BANDIT_OPTIONS := -q -s B101  # don't warn about asserts
 PYTEST_OPTIONS := -q --doctest-modules
 PIPENV_PACKAGES := bandit isort mypy pycodestyle pydocstyle pyflakes pylama pylama_pylint pytest pytest-cov
 SOURCES := $(wildcard *.py)
@@ -8,8 +9,7 @@ TESTS := $(wildcard t/*.py)
 all: lint test requirements.txt
 
 bandit:
-	bandit -q ${SOURCES}
-	bandit -q -s B101 ${TESTS}  # don't warn about asserts
+	bandit ${BANDIT_OPTIONS} ${SOURCES} ${TESTS}
 
 black: isort
 	black -q ${SOURCES} ${TESTS}
