@@ -10,6 +10,4 @@ sudo apt install black ipython3 pypy3 python3-pip
 pip3 install --user pipenv
 PATH+=:~/.local/bin
 pipenv --python 3.8 update
-pipenv install black ||
-  pipenv lock --pre
 pipenv shell

@@ -18,6 +18,7 @@ pip = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
+black = "*"
 
 [dev-packages]
 
