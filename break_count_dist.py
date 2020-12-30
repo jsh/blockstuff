@@ -73,7 +73,7 @@ def main():
         print(f"variance(# of breaks), {statistics.variance(numbreaks_list)}")
         print(
             "q ~ variance/mean = "
-            + f"{statistics.variance(numbreaks_list)/statistics.mean(numbreaks_list)}"
+            f"{statistics.variance(numbreaks_list)/statistics.mean(numbreaks_list)}"
         )
 
     if args.verbose:
