@@ -2,10 +2,13 @@ This installation is set up to be managed by pipenv.
 
 (0) If you do not have pipenv, install it.
 On a Mac with homebrew, "brew install pipenv" should work.
+To install pypy3 with homebrew, run "brew install pypy3"
 
-(1) Run "make pipenv_setup" to install all dependencies
-and then put yourself into a pipenv shell.
+(1) On a newly-spawned cloud Ubuntu box you want these steps
 
-(2) To install pypy3 with homebrew, run "brew install pypy3"
-
-If you're using some other package manager, try "pip install <packagename>"
+cd                                          # be in the right place
+[[ -d blockstuff ]] && rm -rf blockstuff    # and that it's clean
+git clone https://github.com/jsh/blockstuff # get the repo
+cd blockstuff
+git checkout hybrid-oo                      # the right branch
+./linux.sh                                  # everything else
